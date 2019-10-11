@@ -1,0 +1,44 @@
+#!/bin/bash
+
+
+echo "1. These are all of the many different male species available in the data.text file" 
+grep -w "Male" data.text
+
+echo "2. These are the species of humans whos names start with an A or  K" 
+grep -P '(?<=\d,)[AK]' data.text  
+
+echo "3. These are all of the phone numbers of girls you will never get!" 
+grep -Pwo "...-...-...." data.text
+
+echo "4. stored data of each column to new file and name the new file per column name"
+echo "Creates the  id.text file:"
+cut -d ',' -f1 data.text > id.text
+echo "Creates the first_name file:"
+cut -d ',' -f2 data.text > first_name.text
+echo "Creates the last_name file:" 
+cut -d ',' -f3 data.text > last_name.text
+echo "Creates the email file:" 
+cut -d ',' -f4 data.text > email.text
+echo "Creates the gender file:" 
+cut -d ',' -f5 data.text > gender.text
+echo "Creates the ip_address file:" 
+cut -d ',' -f6 data.text > ip_address.text
+echo "Creates the phone file:" 
+cut -d ',' -f7 data.text > phone.text  
+
+echo "5. Here is the total number of members in the file"
+grep -c '[0-201].*' data.text
+
+echo "6. Here is the replaced .com strings with .org"
+sed  's/.com/.org/' data.text 
+
+echo "7. All the first and last names with parenthesies around them"
+perl -pe "s/([A-Z])(?=[a-z]+,[A-Z])/(\1)/" data.text | perl -pe "s/([A-Z])(?=[a-z]+,[A-Z])/(\1)/"
+
+echo "8. Command to delete a specified line from a file"
+sed '10d' data.text
+
+echo "9. Each line numbered"
+cat -n data.text > numfiles.text
+cat  numfiles.text
+
